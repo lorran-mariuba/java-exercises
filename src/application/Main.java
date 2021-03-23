@@ -1,53 +1,52 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Locale;
+import java.util.Scanner;
+
+import entities.Account;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		List<String> list= new ArrayList<>();
-		
-		list.add("Maria");
-		list.add("Alex");
-		list.add("Bob");
-		list.add("Anna");
-		list.add(2, "Marco"); //update position 2 from list.
-		
-		System.out.println(list.size()); // See what size list have.
-		
-		//list.remove("Anna"); remove by name.
-	    //list.remove(1); //remove by position.
-		
-		for (String x : list) {
-			System.out.println(x);
-		}
-		System.out.println("-----------------------------------");
-		list.removeIf(x -> x.charAt(0) == 'M'); //it's a predicate to use lambda.
-		
-		for (String x : list) {
-			System.out.println(x);
-		}
-		System.out.println("------------------------------------");
-		System.out.println("Index of Bob: " + list.indexOf("Bob"));
-		 //when the list don't have element, it's showed negative number -1.
-		System.out.println("Index of Bob: " + list.indexOf("Marco"));
-		System.out.println("------------------------------------");
-		
-		//Create another list to get the result to lambda and converter to list again.
-		/*.stream allow to use lambda, but, to use the new list, it's necessary to use collect 
-		  to convert from lambda to list.*/
-		List<String> result = list.stream().filter(x -> x.charAt(0) == 'A').collect(Collectors.toList());
-		for (String x : result) {
-			System.out.println(x);
-		}
-		System.out.println("------------------------------------");
-		// find the first element which start with for example A.
-		// if don't have the letter in the first element, it'll show null.
-		String name = list.stream().filter(x -> x.charAt(0) == 'J').findFirst().orElse(null);
-		System.out.println(name);
-	}
 
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		Account account;
+
+		System.out.print("Enter account number: ");
+		int number = sc.nextInt();
+		System.out.print("Enter account holder: ");
+		sc.nextLine();
+		String holder = sc.nextLine();
+		System.out.print("Is there an initial deposit (y/n)? ");
+		char response = sc.next().charAt(0);
+		if (response == 'y') {
+			System.out.print("Enter initial deposit value: ");
+			double initialDeposit = sc.nextDouble();
+			account = new Account(number, holder, initialDeposit);
+		}
+		else {
+			account = new Account(number, holder);
+		}
+		
+		System.out.println();
+		System.out.println("Account data:");
+		System.out.println(account);
+		
+		System.out.println();
+		System.out.print("Enter a deposit value: ");
+		double depositValue = sc.nextDouble();
+		account.deposit(depositValue);
+		System.out.println("Updated account data:");
+		System.out.println(account);
+		
+		System.out.println();
+		System.out.print("Enter a withdraw value: ");
+		double withdrawValue = sc.nextDouble();
+		account.withdraw(withdrawValue);
+		System.out.println("Updated account data:");
+		System.out.println(account);
+		
+		sc.close();
+	}
 }
