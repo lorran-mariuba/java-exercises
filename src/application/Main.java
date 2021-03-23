@@ -7,8 +7,8 @@ import entities.Product;
 
 public class Main {
 
-	/* The idea is to enter witch the product and your price. After that, show the price and then put 
-	 * the quantities from this product and show the new price and units. Put a number of product that will
+	/* The idea is to enter with the product and your price. After that, show the price and then put 
+	 * the quantities from this product and show the new price and units. Enter with a number of product that will
 	 * be remove and show again.
 	 */
 	public static void main(String[] args) {
