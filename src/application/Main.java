@@ -1,43 +1,25 @@
 package application;
 
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.Date;
 
-import entities.Product;
-
+import entities.Order;
+import entities.num.OrderStatus;
+ 
 public class Main {
 
-	/* The idea is to enter with the product and your price. After that, show the price and then put 
-	 * the quantities from this product and show the new price and units. Enter with a number of product that will
-	 * be remove and show again.
-	 */
+   // It's just a basic example to use Enum types.
 	public static void main(String[] args) {
-		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
 				
-		System.out.println("Enter product data: ");
-		System.out.print("Name: ");
-		String name = sc.nextLine();
-		System.out.print("Price: ");
-		double price = sc.nextDouble();
-
-		Product product = new Product(name, price); 
+		Order order = new Order(1080, new Date(), OrderStatus.PENDING_PAYMENT);
 		
-		System.out.println();
-		System.out.println("Product data: " + product);
-		System.out.println();
-		System.out.print("Enter the number of products to be added in stock: ");
-		int quantity = sc.nextInt();
-		product.addProducts(quantity);
-		System.out.println();
-		System.out.println("Updated data: " + product);
-		System.out.println();
-		System.out.print("Enter the number of products to be removed from stock: ");
-		quantity = sc.nextInt();
-		product.removeProducts(quantity);
-		System.out.println();
-		System.out.println("Updated data: " + product);
-		sc.close();
+		System.out.println(order);
+		
+		OrderStatus os1 = OrderStatus.DELIVERED;
+		
+		OrderStatus os2 = OrderStatus.valueOf("DELIVERED");
+		
+		System.out.println(os1);
+		System.out.println(os2);
 
 	}
 
